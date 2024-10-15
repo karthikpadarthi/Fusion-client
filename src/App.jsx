@@ -8,6 +8,7 @@ import Profile from "./Modules/Profile/profile";
 import LoginPage from "./pages/login";
 import ForgotPassword from "./pages/forgotPassword";
 import AcademicPage from "./Modules/Academic/index";
+import MessPage from "./Modules/Mess/pages/index";
 import ValidateAuth from "./helper/validateauth";
 
 export default function App() {
@@ -37,6 +38,14 @@ export default function App() {
           element={
             <Layout>
               <AcademicPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/mess"
+          element={
+            <Layout>
+              <MessPage />
             </Layout>
           }
         />
