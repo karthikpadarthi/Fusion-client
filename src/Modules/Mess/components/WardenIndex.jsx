@@ -12,9 +12,6 @@ import { useRef, useState } from "react";
 import CustomBreadcrumbs from "../../../components/Breadcrumbs.jsx";
 import classes from "../styles/messModule.module.css";
 
-// Import all the components here
-//   import ComplaintForm from "./components/ComplaintForm.jsx";
-
 function Warden() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);

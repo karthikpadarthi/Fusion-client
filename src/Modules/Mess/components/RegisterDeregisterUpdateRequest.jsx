@@ -11,17 +11,18 @@ import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
-import UpdateBill from "./UpdateBills.jsx";
-import BillBase from "./BillBaseAndExcelUpload.jsx";
+import ViewRegistrationRequests from "./ViewRegistrationRequests.jsx";
+import ViewDeregistrationRequests from "./ViewDeregistrationRequests.jsx";
+import ViewUpdatePaymentRequests from "./ViewUpdatePaymentRequests.jsx";
 
-function MessActivities() {
+function RegDeregUpdatePayment() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
   const tabItems = [
-    { title: "Bill base and Excel upload" },
-    { title: "Update Bill" },
-    { title: "View Bill" },
+    { title: "Registration Requests" },
+    { title: "Deregistration Requests" },
+    { title: "Update Requests" },
   ];
 
   const handleTabChange = (direction) => {
@@ -31,7 +32,7 @@ function MessActivities() {
         : Math.max(+activeTab - 1, 0);
     setActiveTab(String(newIndex));
     tabsListRef.current.scrollBy({
-      left: direction === "next" ? 50 : -50,
+      left: direction === "next" ? 100 : -100,
       behavior: "smooth",
     });
   };
@@ -40,11 +41,11 @@ function MessActivities() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <BillBase />;
+        return <ViewRegistrationRequests />;
       case "1":
-        return <UpdateBill />;
+        return <ViewDeregistrationRequests />;
       case "2":
-        return <UpdateBill />;
+        return <ViewUpdatePaymentRequests />;
       default:
         return <Loader />;
     }
@@ -54,7 +55,6 @@ function MessActivities() {
     <>
       {/* Tab navigation */}
       <Flex justify="center" align="center" mt="5">
-        {" "}
         <Flex justify="space-between" align="center" gap="1rem" mt="1.5rem">
           <Button
             onClick={() => handleTabChange("prev")}
@@ -68,9 +68,18 @@ function MessActivities() {
             />
           </Button>
 
-          <div className={classes.fusionTabsContainer} ref={tabsListRef}>
+          {/* Tabs container with scrolling */}
+          <div
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+              maxWidth: "1000px",
+            }}
+            ref={tabsListRef}
+          >
             <Tabs value={activeTab} onChange={setActiveTab}>
-              <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
+              <Tabs.List>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
@@ -106,7 +115,7 @@ function MessActivities() {
 
       {/* Main content */}
       <Grid>
-        <Container fluid style={{ maxWidth: "600px", margin: "0 auto" }}>
+        <Container fluid style={{ maxWidth: "1000px", margin: "0 auto" }}>
           {renderTabContent()}
         </Container>
       </Grid>
@@ -114,4 +123,4 @@ function MessActivities() {
   );
 }
 
-export default MessActivities;
+export default RegDeregUpdatePayment;

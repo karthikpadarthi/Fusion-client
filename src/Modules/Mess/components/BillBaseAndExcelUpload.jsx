@@ -24,9 +24,9 @@ function BillBase() {
   const uploadFile = (event) => {
     event.preventDefault();
     if (file) {
-      alert(`File uploaded: ${file.name}`); // Alert to simulate file upload
+      alert(`File uploaded: ${file.name}`);
     } else {
-      alert("Please select a file to upload."); // Alert if no file selected
+      alert("Please select a file to upload.");
     }
   };
 
@@ -34,8 +34,8 @@ function BillBase() {
     <Container
       size="lg"
       style={{
-        maxWidth: "800px", // Limit maximum width to 800px
-        width: "570px", // Set the width to a fixed value (e.g., 800px)
+        maxWidth: "800px",
+        width: "570px",
         marginTop: "30px",
       }} // Container settings
     >
@@ -60,7 +60,6 @@ function BillBase() {
               />
               <div style={{ marginTop: "10px" }}>
                 {" "}
-                {/* Adjust marginTop as needed */}
                 <Button
                   className="ui primary button right floated"
                   type="submit"
@@ -86,14 +85,13 @@ function BillBase() {
               label="Upload Monthly Bill"
               placeholder="Choose Excel file"
               value={file}
-              onChange={setFile} // Directly update file state
+              onChange={setFile}
               accept=".xlsx,.xls"
               required
-              styles={{ input: { width: "100%" } }} // Set full width
+              styles={{ input: { width: "100%" } }}
             />
             <div style={{ marginTop: "10px" }}>
               {" "}
-              {/* Adjust marginTop as needed */}
               <Button
                 className="ui primary fluid button"
                 type="submit"

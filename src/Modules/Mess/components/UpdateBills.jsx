@@ -9,25 +9,24 @@ import {
   Paper,
   Space,
 } from "@mantine/core"; // Import Mantine components
-import { User, CurrencyDollar, Calendar } from "@phosphor-icons/react"; // Import Phosphor Icons
+import { User, Calendar } from "@phosphor-icons/react"; // Import Phosphor Icons
 
 function UpdateBill() {
   return (
     <Container
       size="lg"
       style={{
-        maxWidth: "800px", // Limit maximum width to 800px
-        width: "570px", // Set the width to a fixed value (e.g., 800px)
-        // marginRight: "800px", // Ensures the right margin is auto, allowing centering effect
+        maxWidth: "800px",
+        width: "570px",
         marginTop: "25px",
-      }} // Container settings
+      }}
     >
       <Paper
         shadow="md"
         radius="md"
         p="xl"
         withBorder
-        style={{ width: "100%", padding: "30px" }} // Increased padding
+        style={{ width: "100%", padding: "30px" }}
       >
         <Title order={2} align="center" mb="lg" style={{ color: "#1c7ed6" }}>
           Update Bill
@@ -56,7 +55,6 @@ function UpdateBill() {
             size="md"
             min={0}
             step={100}
-            icon={<CurrencyDollar size={20} />}
             mb="lg"
           />
 

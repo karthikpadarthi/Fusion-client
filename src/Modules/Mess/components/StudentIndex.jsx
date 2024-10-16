@@ -12,7 +12,6 @@ import { useRef, useState } from "react";
 import CustomBreadcrumbs from "../../../components/Breadcrumbs.jsx";
 import classes from "../styles/messModule.module.css";
 
-// Import all the components here
 //   import ComplaintForm from "./components/ComplaintForm.jsx";
 
 function Student() {
@@ -20,15 +19,13 @@ function Student() {
   const tabsListRef = useRef(null);
 
   const tabItems = [
-    { title: "View FeedBack | Statistics" },
-    { title: "Respond to rebate requests" },
-    { title: "Reg/Dereg/UpdatePayment Requests" },
-    { title: "View Special Food requests" },
     { title: "View Menu" },
-    { title: "Mess Activities" },
-    { title: "Mess Registrations" },
-    { title: "Update Menu" },
-    { title: "Update Sem Dates" },
+    { title: "View Bill and Payments" },
+    { title: "Registration" },
+    { title: "Feedback" },
+    { title: "Applications" },
+    { title: "Update Payment" },
+    { title: "Deregistration" },
   ];
 
   const handleTabChange = (direction) => {
@@ -47,23 +44,19 @@ function Student() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <p>View Feedback | Statistics</p>;
-      case "1":
-        return <p>Respond to rebate requests</p>;
-      case "2":
-        return <p>Reg/Dereg/UpdatePayment Requests</p>;
-      case "3":
-        return <p>View Special Food requests</p>;
-      case "4":
         return <p>View Menu</p>;
+      case "1":
+        return <p>View Bill and Payments</p>;
+      case "2":
+        return <p>Registration</p>;
+      case "3":
+        return <p>Feedback</p>;
+      case "4":
+        return <p>Applications</p>;
       case "5":
-        return <p>Mess Activities</p>;
+        return <p>Update Payment</p>;
       case "6":
-        return <p>Mess Registrations</p>;
-      case "7":
-        return <p>Update Menu</p>;
-      case "8":
-        return <p>Update Sem Dates</p>;
+        return <p>Deregistration</p>;
       default:
         return <Loader />;
     }

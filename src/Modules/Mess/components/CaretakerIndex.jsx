@@ -11,11 +11,12 @@ import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import CustomBreadcrumbs from "../../../components/Breadcrumbs.jsx";
 import classes from "../styles/messModule.module.css";
-import UpdateSemDates from "./UpdateSemesterDates.jsx";
+import UpdateSemDates from "./UpdateSemDates.jsx";
 import MessActivities from "./MessActivities.jsx";
-
-// Import all the components here
-//   import ComplaintForm from "./components/ComplaintForm.jsx";
+import ViewFeedback from "./ViewFeedback.jsx";
+import RespondToRebateRequest from "./RespondRebate.jsx";
+import ViewSpecialFoodRequest from "./ViewSpecialFoodRequest.jsx";
+import RegDeregUpdatePayment from "./RegisterDeregisterUpdateRequest.jsx";
 
 function Caretaker() {
   const [activeTab, setActiveTab] = useState("0");
@@ -49,13 +50,13 @@ function Caretaker() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <p>View Feedback | Statistics</p>;
+        return <ViewFeedback />;
       case "1":
-        return <p>Respond to rebate requests</p>;
+        return <RespondToRebateRequest />;
       case "2":
-        return <p>Reg/Dereg/UpdatePayment Requests</p>;
+        return <RegDeregUpdatePayment />;
       case "3":
-        return <p>View Special Food requests</p>;
+        return <ViewSpecialFoodRequest />;
       case "4":
         return <p>View Menu</p>;
       case "5":

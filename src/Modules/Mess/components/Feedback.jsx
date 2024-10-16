@@ -12,17 +12,13 @@ import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
 import UpdateBill from "./UpdateBills.jsx";
-import BillBase from "./BillBaseAndExcelUpload.jsx";
+import ViewFeedback from "./ViewFeedback.jsx";
 
-function MessActivities() {
+function Feedback() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
-  const tabItems = [
-    { title: "Bill base and Excel upload" },
-    { title: "Update Bill" },
-    { title: "View Bill" },
-  ];
+  const tabItems = [{ title: "View Feedback" }, { title: "Statistics" }];
 
   const handleTabChange = (direction) => {
     const newIndex =
@@ -40,10 +36,8 @@ function MessActivities() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <BillBase />;
+        return <ViewFeedback />;
       case "1":
-        return <UpdateBill />;
-      case "2":
         return <UpdateBill />;
       default:
         return <Loader />;
@@ -104,7 +98,6 @@ function MessActivities() {
         </Flex>
       </Flex>
 
-      {/* Main content */}
       <Grid>
         <Container fluid style={{ maxWidth: "600px", margin: "0 auto" }}>
           {renderTabContent()}
@@ -114,4 +107,4 @@ function MessActivities() {
   );
 }
 
-export default MessActivities;
+export default Feedback;
