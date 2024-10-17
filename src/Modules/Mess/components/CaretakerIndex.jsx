@@ -17,6 +17,7 @@ import ViewFeedback from "./ViewFeedback.jsx";
 import RespondToRebateRequest from "./RespondRebate.jsx";
 import ViewSpecialFoodRequest from "./ViewSpecialFoodRequest.jsx";
 import RegDeregUpdatePayment from "./RegisterDeregisterUpdateRequest.jsx";
+import MessRegistration from "./MessRegistrations.jsx";
 
 function Caretaker() {
   const [activeTab, setActiveTab] = useState("0");
@@ -29,7 +30,7 @@ function Caretaker() {
     { title: "View Special Food requests" },
     { title: "View Menu" },
     { title: "Mess Activities" },
-    { title: "View Registrations" },
+    { title: "Mess Registrations" },
     { title: "Update Menu" },
     { title: "Update Sem Dates" },
   ];
@@ -62,7 +63,7 @@ function Caretaker() {
       case "5":
         return <MessActivities />;
       case "6":
-        return <p>Mess Registrations</p>;
+        return <MessRegistration />;
       case "7":
         return <p>Update Menu</p>;
       case "8":
