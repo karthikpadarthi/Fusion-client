@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Container, Paper, Title, Button } from "@mantine/core";
+import { Table, Container, Paper, Title, Button, Flex } from "@mantine/core";
 
 // Initial registration request data
 const initialRegistrationRequests = [
@@ -29,6 +29,18 @@ const initialRegistrationRequests = [
   },
 ];
 
+const tableHeaders = [
+  "Student ID",
+  "Transaction No",
+  "Image",
+  "Amount",
+  "Start Date",
+  "Payment Date",
+  "Remark",
+  "Mess",
+  "Accept/Reject",
+];
+
 // Main component
 function ViewRegistrationRequests() {
   const [registrationData, setRegistrationData] = useState(
@@ -44,31 +56,47 @@ function ViewRegistrationRequests() {
     );
   };
 
+  const renderHeader = (titles) => {
+    return titles.map((title, index) => (
+      <Table.Th key={index}>
+        <Flex align="center" justify="center" h="100%">
+          {title}
+        </Flex>
+      </Table.Th>
+    ));
+  };
+
   // Render registration request rows
   const renderRows = () =>
     registrationData.map((item, index) => (
-      <tr key={index}>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+      <Table.Tr key={index} h={50}>
+        <Table.Td align="center" p={12}>
           {item.student_id}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.transaction_no}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <a href={item.image_url} target="_blank" rel="noopener noreferrer">
             View Image
           </a>
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.amount}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.amount}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.start_date}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.payment_date}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.remark}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.mess}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.remark}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.mess}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <Button
             onClick={() => toggleAcceptance(index)}
             variant={item.accepted ? "filled" : "outline"}
@@ -77,52 +105,23 @@ function ViewRegistrationRequests() {
           >
             {item.accepted ? "Accepted" : "Rejected"}
           </Button>
-        </td>
-      </tr>
+        </Table.Td>
+      </Table.Tr>
     ));
 
   return (
-    <Container size="lg" style={{ marginTop: "25px" }}>
+    <Container size="lg" mt={30} miw="70rem">
       <Paper shadow="md" radius="md" p="lg" withBorder>
-        <Title order={2} align="center" mb="lg" style={{ color: "#1c7ed6" }}>
+        <Title order={2} align="center" mb="lg" c="#1c7ed6">
           Registration Requests
         </Title>
 
         {/* Table */}
-        <Table striped highlightOnHover withBorder withColumnBorders>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Student ID
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Transaction No
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Image</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Amount</th>
-              <th
-                style={{ textAlign: "center", padding: "12px", width: "100px" }}
-              >
-                Start Date
-              </th>
-              <th
-                style={{ textAlign: "center", padding: "12px", width: "100px" }}
-              >
-                Payment Date
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Remark</th>
-              <th
-                style={{ textAlign: "center", padding: "12px", width: "100px" }}
-              >
-                Mess
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Accept/Reject
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>{renderRows()}</tbody>
+        <Table striped highlightOnHover withColumnBorders>
+          <Table.Thead>
+            <Table.Tr>{renderHeader(tableHeaders)}</Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{renderRows()}</Table.Tbody>
         </Table>
       </Paper>
     </Container>

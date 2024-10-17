@@ -1,8 +1,8 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
-  Grid,
   Loader,
   Tabs,
   Text,
@@ -23,15 +23,15 @@ function Caretaker() {
   const tabsListRef = useRef(null);
 
   const tabItems = [
-    { title: "View FeedBack | Statistics" },
-    { title: "Respond to rebate requests" },
-    { title: "Reg/Dereg/UpdatePayment Requests" },
-    { title: "View Special Food requests" },
+    { title: "View Feedback" },
+    { title: "Respond to Rebate" },
+    { title: "Requests" },
+    { title: "View Special Food Requests" },
     { title: "View Menu" },
     { title: "Mess Activities" },
     { title: "View Registrations" },
     { title: "Update Menu" },
-    { title: "Update Sem Dates" },
+    { title: "Update Semester Dates" },
   ];
 
   const handleTabChange = (direction) => {
@@ -82,7 +82,8 @@ function Caretaker() {
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
@@ -90,7 +91,7 @@ function Caretaker() {
             />
           </Button>
 
-          <div className={classes.fusionTabsContainer} ref={tabsListRef}>
+          <Box className={classes.fusionTabsContainer} ref={tabsListRef}>
             <Tabs value={activeTab} onChange={setActiveTab}>
               <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
                 {tabItems.map((item, index) => (
@@ -110,13 +111,14 @@ function Caretaker() {
                 ))}
               </Tabs.List>
             </Tabs>
-          </div>
+          </Box>
 
           <Button
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
@@ -126,10 +128,7 @@ function Caretaker() {
         </Flex>
       </Flex>
 
-      {/* Main content */}
-      <Grid>
-        <Container fluid>{renderTabContent()}</Container>
-      </Grid>
+      <Container fluid>{renderTabContent()}</Container>
     </>
   );
 }

@@ -61,14 +61,7 @@ const initialFeedbackData = [
   },
 ];
 
-const tableHeader = [
-  "Feedback Date",
-  "Student ID",
-  "Feedback Type",
-  "Description",
-  "Mess",
-  "Actions",
-];
+const tableHeader = ["Date", "Student ID", "Description", "Mess", "Actions"];
 
 // Main component
 function ViewFeedback() {
@@ -94,9 +87,6 @@ function ViewFeedback() {
         </Table.Td>
         <Table.Td align="center" p={12}>
           {item.student_id}
-        </Table.Td>
-        <Table.Td align="center" p={12}>
-          {item.feedback_type}
         </Table.Td>
         <Table.Td align="center" p={12}>
           {item.description}
@@ -128,14 +118,14 @@ function ViewFeedback() {
   };
 
   return (
-    <Container size="lg" mt={30} miw="80rem">
+    <Container size="lg" mt={30} miw="50rem">
       <Paper shadow="md" radius="md" p="lg" withBorder>
         <Title order={2} align="center" mb="lg" c="#1c7ed6">
           View Feedback
         </Title>
 
         {/* Manually position the Group */}
-        <Flex justifyContent="center" mb={30} gap={20}>
+        <Flex justify="center" align="center" mb={30} gap={20}>
           <Button
             onClick={() => setActiveTab("Food")}
             leftSection={<PhosphorIcons.ForkKnife size={20} />}
@@ -171,7 +161,7 @@ function ViewFeedback() {
         </Flex>
 
         {/* Table */}
-        <Table striped highlightOnHover withBorder withColumnBorders>
+        <Table striped highlightOnHover withColumnBorders>
           <Table.Thead>
             <Table.Tr>{renderHeader(tableHeader)}</Table.Tr>
           </Table.Thead>
