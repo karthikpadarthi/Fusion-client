@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Container, Paper, Title, Button, Group } from "@mantine/core";
+import { Table, Container, Paper, Title, Button, Flex } from "@mantine/core";
 import * as PhosphorIcons from "@phosphor-icons/react"; // Default import for icons
 
 const initialFeedbackData = [
@@ -61,6 +61,15 @@ const initialFeedbackData = [
   },
 ];
 
+const tableHeader = [
+  "Feedback Date",
+  "Student ID",
+  "Feedback Type",
+  "Description",
+  "Mess",
+  "Actions",
+];
+
 // Main component
 function ViewFeedback() {
   const [activeTab, setActiveTab] = useState("Food");
@@ -79,19 +88,23 @@ function ViewFeedback() {
   // Render feedback table rows with added padding for spacing
   const renderRows = () =>
     filteredFeedback.map((item, index) => (
-      <tr key={index} style={{ height: "50px" }}>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.fdate}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+      <Table.Tr key={index} h={50}>
+        <Table.Td align="center" p={12}>
+          {item.fdate}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.student_id}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.feedback_type}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.description}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.mess}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.mess}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <Button
             onClick={() => markAsRead(index)}
             variant="outline"
@@ -100,90 +113,69 @@ function ViewFeedback() {
           >
             Mark as Read
           </Button>
-        </td>
-      </tr>
+        </Table.Td>
+      </Table.Tr>
     ));
 
+  const renderHeader = (titles) => {
+    return titles.map((title, index) => (
+      <Table.Th key={index}>
+        <Flex align="center" justify="center" h="100%">
+          {title}
+        </Flex>
+      </Table.Th>
+    ));
+  };
+
   return (
-    <Container
-      size="lg"
-      style={{
-        maxWidth: "1200px",
-        width: "900px",
-        marginTop: "25px",
-        marginLeft: "-10px",
-      }}
-    >
+    <Container size="lg" mt={30} miw="80rem">
       <Paper shadow="md" radius="md" p="lg" withBorder>
-        <Title order={2} align="center" mb="lg" style={{ color: "#1c7ed6" }}>
+        <Title order={2} align="center" mb="lg" c="#1c7ed6">
           View Feedback
         </Title>
 
         {/* Manually position the Group */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "30px",
-          }}
-        >
-          <Group>
-            <Button
-              onClick={() => setActiveTab("Food")}
-              leftIcon={<PhosphorIcons.FastFood size={20} />}
-              variant={activeTab === "Food" ? "filled" : "outline"}
-              size="xs"
-            >
-              Food
-            </Button>
-            <Button
-              onClick={() => setActiveTab("Cleanliness")}
-              leftIcon={<PhosphorIcons.Broom size={20} />}
-              variant={activeTab === "Cleanliness" ? "filled" : "outline"}
-              size="xs"
-            >
-              Cleanliness
-            </Button>
-            <Button
-              onClick={() => setActiveTab("Maintenance")}
-              leftIcon={<PhosphorIcons.Wrench size={20} />}
-              variant={activeTab === "Maintenance" ? "filled" : "outline"}
-              size="xs"
-            >
-              Maintenance
-            </Button>
-            <Button
-              onClick={() => setActiveTab("Others")}
-              leftIcon={<PhosphorIcons.ChatText size={20} />}
-              variant={activeTab === "Others" ? "filled" : "outline"}
-              size="xs"
-            >
-              Others
-            </Button>
-          </Group>
-        </div>
+        <Flex justifyContent="center" mb={30} gap={20}>
+          <Button
+            onClick={() => setActiveTab("Food")}
+            leftSection={<PhosphorIcons.ForkKnife size={20} />}
+            variant={activeTab === "Food" ? "filled" : "outline"}
+            size="xs"
+          >
+            Food
+          </Button>
+          <Button
+            onClick={() => setActiveTab("Cleanliness")}
+            leftSection={<PhosphorIcons.Broom size={20} />}
+            variant={activeTab === "Cleanliness" ? "filled" : "outline"}
+            size="xs"
+          >
+            Cleanliness
+          </Button>
+          <Button
+            onClick={() => setActiveTab("Maintenance")}
+            leftSection={<PhosphorIcons.Wrench size={20} />}
+            variant={activeTab === "Maintenance" ? "filled" : "outline"}
+            size="xs"
+          >
+            Maintenance
+          </Button>
+          <Button
+            onClick={() => setActiveTab("Others")}
+            leftSection={<PhosphorIcons.ChatText size={20} />}
+            variant={activeTab === "Others" ? "filled" : "outline"}
+            size="xs"
+          >
+            Others
+          </Button>
+        </Flex>
 
         {/* Table */}
         <Table striped highlightOnHover withBorder withColumnBorders>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Feedback Date
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Student ID
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Feedback Type
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Description
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Mess</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{renderRows()}</tbody>
+          <Table.Thead>
+            <Table.Tr>{renderHeader(tableHeader)}</Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{renderRows()}</Table.Tbody>
         </Table>
       </Paper>
     </Container>

@@ -128,7 +128,7 @@ function Caretaker() {
 
       {/* Main content */}
       <Grid>
-        <Container>{renderTabContent()}</Container>
+        <Container fluid>{renderTabContent()}</Container>
       </Grid>
     </>
   );
