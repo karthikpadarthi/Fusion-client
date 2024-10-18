@@ -7,7 +7,7 @@ import {
   Tabs,
   Text,
 } from "@mantine/core";
-import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react"; // Updated to latest icons
 import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
@@ -16,7 +16,7 @@ import BillBase from "./BillBaseAndExcelUpload.jsx";
 import ViewStudentBill from "./ViewStudentBill.jsx";
 
 function MessActivities() {
-  const [activeTab, setActiveTab] = useState("0");
+  const [activeTab, setActiveTab] = useState(0); // Use integer instead of string for the active tab
   const tabsListRef = useRef(null);
 
   const tabItems = [
@@ -25,12 +25,13 @@ function MessActivities() {
     { title: "View Bill" },
   ];
 
+  // Function to handle tab changes
   const handleTabChange = (direction) => {
     const newIndex =
       direction === "next"
-        ? Math.min(+activeTab + 1, tabItems.length - 1)
-        : Math.max(+activeTab - 1, 0);
-    setActiveTab(String(newIndex));
+        ? Math.min(activeTab + 1, tabItems.length - 1)
+        : Math.max(activeTab - 1, 0);
+    setActiveTab(newIndex);
     tabsListRef.current.scrollBy({
       left: direction === "next" ? 50 : -50,
       behavior: "smooth",
@@ -40,11 +41,11 @@ function MessActivities() {
   // Function to render content based on active tab
   const renderTabContent = () => {
     switch (activeTab) {
-      case "0":
+      case 0:
         return <BillBase />;
-      case "1":
+      case 1:
         return <UpdateBill />;
-      case "2":
+      case 2:
         return <ViewStudentBill />;
       default:
         return <Loader />;
@@ -55,31 +56,30 @@ function MessActivities() {
     <>
       {/* Tab navigation */}
       <Flex justify="center" align="center" mt="5">
-        {" "}
         <Flex justify="space-between" align="center" gap="1rem" mt="1.5rem">
           <Button
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
             style={{ border: "none" }}
+            aria-label="Previous Tab" // Added aria-label for accessibility
           >
-            <CaretCircleLeft
-              className={classes.fusionCaretCircleIcon}
-              weight="light"
-            />
+            <CaretLeft className={classes.fusionCaretIcon} weight="light" />{" "}
+            {/* Updated icon */}
           </Button>
 
           <div className={classes.fusionTabsContainer} ref={tabsListRef}>
-            <Tabs value={activeTab} onChange={setActiveTab}>
+            <Tabs
+              value={String(activeTab)}
+              onChange={(value) => setActiveTab(Number(value))}
+            >
               <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
                     key={index}
                     className={
-                      activeTab === `${index}`
-                        ? classes.fusionActiveRecentTab
-                        : ""
+                      activeTab === index ? classes.fusionActiveRecentTab : ""
                     }
                   >
                     <Flex gap="4px">
@@ -96,11 +96,10 @@ function MessActivities() {
             variant="default"
             p={0}
             style={{ border: "none" }}
+            aria-label="Next Tab" // Added aria-label for accessibility
           >
-            <CaretCircleRight
-              className={classes.fusionCaretCircleIcon}
-              weight="light"
-            />
+            <CaretRight className={classes.fusionCaretIcon} weight="light" />{" "}
+            {/* Updated icon */}
           </Button>
         </Flex>
       </Flex>

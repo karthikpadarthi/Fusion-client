@@ -10,7 +10,12 @@ import {
   Title,
   Space,
 } from "@mantine/core";
-import { UploadSimple, MagnifyingGlass, Plus, Trash } from "phosphor-react"; // Phosphor icons
+import {
+  FileArrowUp,
+  MagnifyingGlass,
+  PlusCircle,
+  TrashSimple,
+} from "phosphor-react"; // Latest Phosphor icons
 
 function ManageMess() {
   const [mess, setMess] = useState("");
@@ -46,7 +51,7 @@ function ManageMess() {
           {/* Buttons for Search, Add, Remove */}
           <Group spacing="sm" mb="md">
             <Button
-              leftIcon={<MagnifyingGlass size={18} />}
+              leftIcon={<MagnifyingGlass size={18} />} // Search icon
               onClick={() => {
                 console.log("Searching for Roll No:", rollNo);
               }}
@@ -54,7 +59,7 @@ function ManageMess() {
               Search
             </Button>
             <Button
-              leftIcon={<Plus size={18} />}
+              leftIcon={<PlusCircle size={18} />} // New PlusCircle icon
               color="green"
               onClick={() => {
                 console.log("Adding Roll No:", rollNo);
@@ -63,7 +68,7 @@ function ManageMess() {
               Add
             </Button>
             <Button
-              leftIcon={<Trash size={18} />}
+              leftIcon={<TrashSimple size={18} />} // Replacing Trash with TrashSimple
               color="red"
               onClick={() => {
                 console.log("Removing Roll No:", rollNo);
@@ -82,7 +87,7 @@ function ManageMess() {
                 console.log("Remove all from Mess 1");
               }}
             >
-              Remove All from Mess1
+              Remove All from Mess 1
             </Button>
             <Button
               variant="outline"
@@ -91,7 +96,7 @@ function ManageMess() {
                 console.log("Remove all from Mess 2");
               }}
             >
-              Remove All from Mess2
+              Remove All from Mess 2
             </Button>
           </Group>
 
@@ -103,12 +108,13 @@ function ManageMess() {
               value={excelFile}
               onChange={setExcelFile}
               accept=".xlsx,.xls"
+              icon={<FileArrowUp size={18} />} // Updated to FileArrowUp icon
             />
           </Group>
 
           {/* Register All Button */}
           <Button
-            leftIcon={<UploadSimple size={18} />}
+            leftIcon={<FileArrowUp size={18} />} // Updated icon for Register All
             fullWidth
             color="blue"
             onClick={() => {
@@ -128,7 +134,8 @@ function ManageMess() {
               </li>
               <li>File should be in .xlsx or .xls format.</li>
               <li>
-                This registration will add the Students to provided mess_option.
+                This registration will add the Students to the provided
+                mess_option.
               </li>
             </ul>
           </div>

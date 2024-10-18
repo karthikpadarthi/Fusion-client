@@ -10,6 +10,7 @@ import {
   Group,
   Select,
 } from "@mantine/core"; // Mantine UI components
+import { MagnifyingGlass, FunnelSimple } from "@phosphor-icons/react"; // Phosphor Icons
 
 // Dummy Data for mess registrations
 const studentsData = [
@@ -108,7 +109,7 @@ function ViewRegistrations() {
         </Title>
 
         <form>
-          {/* Search section */}
+          {/* Search section with icon */}
           <TextInput
             label="Search by Roll Number"
             placeholder="Enter Roll Number"
@@ -117,6 +118,7 @@ function ViewRegistrations() {
             radius="md"
             size="md"
             mb="lg"
+            icon={<MagnifyingGlass size={18} />} // Added Phosphor icon
           />
 
           {/* Filter section */}
@@ -129,6 +131,7 @@ function ViewRegistrations() {
               data={["Registered", "Deregistered", "All"]}
               radius="md"
               size="md"
+              icon={<FunnelSimple size={18} />} // Added Phosphor icon
             />
             <Select
               label="Filter by Program"
@@ -138,6 +141,7 @@ function ViewRegistrations() {
               data={["B.Tech", "M.Tech", "All"]}
               radius="md"
               size="md"
+              icon={<FunnelSimple size={18} />} // Added Phosphor icon
             />
             <Select
               label="Filter by Mess"
@@ -147,6 +151,7 @@ function ViewRegistrations() {
               data={["Mess 1", "Mess 2", "All"]}
               radius="md"
               size="md"
+              icon={<FunnelSimple size={18} />} // Added Phosphor icon
             />
           </Group>
 
@@ -156,6 +161,7 @@ function ViewRegistrations() {
             radius="md"
             color="blue"
             onClick={handleFilter}
+            leftIcon={<FunnelSimple size={18} />} // Added Phosphor icon to button
           >
             Apply Filters
           </Button>

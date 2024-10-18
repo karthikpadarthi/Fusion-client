@@ -11,6 +11,7 @@ import {
   Space,
   Modal,
 } from "@mantine/core"; // Mantine UI components
+import { MagnifyingGlass, Money, Receipt } from "@phosphor-icons/react"; // Phosphor icons
 
 // Dummy Data for students
 const studentsData = [
@@ -177,6 +178,7 @@ function UpdateStudentBill() {
             radius="md"
             size="md"
             mb="lg"
+            icon={<MagnifyingGlass size={18} />}
           />
 
           <Space h="md" />
@@ -268,6 +270,7 @@ function UpdateStudentBill() {
                       size="xs"
                       radius="md"
                       onClick={() => handleViewBill(student)}
+                      leftIcon={<Receipt size={16} />}
                     >
                       View Bills
                     </Button>
@@ -278,6 +281,7 @@ function UpdateStudentBill() {
                       size="xs"
                       radius="md"
                       onClick={() => handleViewPayments(student)}
+                      leftIcon={<Money size={16} />}
                     >
                       View Payments
                     </Button>

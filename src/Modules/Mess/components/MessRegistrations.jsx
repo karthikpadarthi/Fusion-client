@@ -7,7 +7,7 @@ import {
   Tabs,
   Text,
 } from "@mantine/core";
-import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
@@ -59,7 +59,7 @@ function MessActivities() {
             style={{ border: "none" }}
             disabled={activeTab === "0"} // Disable button if on the first tab
           >
-            <CaretCircleLeft
+            <CaretLeft
               className={classes.fusionCaretCircleIcon}
               weight="light"
             />
@@ -94,7 +94,7 @@ function MessActivities() {
             style={{ border: "none" }}
             disabled={activeTab === `${tabItems.length - 1}`} // Disable button if on the last tab
           >
-            <CaretCircleRight
+            <CaretRight
               className={classes.fusionCaretCircleIcon}
               weight="light"
             />
