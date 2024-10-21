@@ -1,24 +1,26 @@
-import { Button, Container, Flex, Loader, Tabs, Text } from "@mantine/core";
+import {
+  Button,
+  Container,
+  Flex,
+  Grid,
+  Loader,
+  Tabs,
+  Text,
+} from "@mantine/core";
 import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
-import CustomBreadcrumbs from "../../../components/Breadcrumbs.jsx";
 import classes from "../styles/messModule.module.css";
-import UpdatePayments from "./UpdatePayments.jsx";
 
-//   import ComplaintForm from "./components/ComplaintForm.jsx";
+import UpdateBalanceRequest from "./UpdateBalanceRequest.jsx";
+import UpdateBalanceRequestStatus from "./UpdateBalanceRequestStatus.jsx";
 
-function Student() {
+function UpdatePayments() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
   const tabItems = [
-    { title: "View Menu" },
-    { title: "View Bill and Payments" },
-    { title: "Registration" },
-    { title: "Feedback" },
-    { title: "Applications" },
-    { title: "Update Payment" },
-    { title: "Deregistration" },
+    { title: "Update Balance Request" },
+    { title: "Request Status" },
   ];
 
   const handleTabChange = (direction) => {
@@ -28,7 +30,7 @@ function Student() {
         : Math.max(+activeTab - 1, 0);
     setActiveTab(String(newIndex));
     tabsListRef.current.scrollBy({
-      left: direction === "next" ? 50 : -50,
+      left: direction === "next" ? 100 : -100,
       behavior: "smooth",
     });
   };
@@ -37,19 +39,9 @@ function Student() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <p>View Menu</p>;
+        return <UpdateBalanceRequest />;
       case "1":
-        return <p>View Bill and Payments</p>;
-      case "2":
-        return <p>Registration</p>;
-      case "3":
-        return <p>Feedback</p>;
-      case "4":
-        return <p>Applications</p>;
-      case "5":
-        return <UpdatePayments />;
-      case "6":
-        return <p>Deregistration</p>;
+        return <UpdateBalanceRequestStatus />;
       default:
         return <Loader />;
     }
@@ -57,16 +49,14 @@ function Student() {
 
   return (
     <>
-      {/* Navbar contents */}
-      <CustomBreadcrumbs />
-      <Flex justify="space-between" align="center" mt="lg">
-        <Flex justify="flex-start" align="center" gap="1rem" mt="1.5rem">
+      {/* Tab navigation */}
+      <Flex justify="center" align="center" mt="5">
+        <Flex justify="space-between" align="center" gap="1rem" mt="1.5rem">
           <Button
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            bd={0}
-            bg="transparent"
+            style={{ border: "none" }}
           >
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
@@ -74,9 +64,18 @@ function Student() {
             />
           </Button>
 
-          <div className={classes.fusionTabsContainer} ref={tabsListRef}>
+          {/* Tabs container with scrolling */}
+          <div
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+              maxWidth: "1000px",
+            }}
+            ref={tabsListRef}
+          >
             <Tabs value={activeTab} onChange={setActiveTab}>
-              <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
+              <Tabs.List>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
@@ -100,8 +99,7 @@ function Student() {
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            bd={0}
-            bg="transparent"
+            style={{ border: "none" }}
           >
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
@@ -112,9 +110,13 @@ function Student() {
       </Flex>
 
       {/* Main content */}
-      <Container fluid>{renderTabContent()}</Container>
+      <Grid>
+        <Container fluid style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          {renderTabContent()}
+        </Container>
+      </Grid>
     </>
   );
 }
 
-export default Student;
+export default UpdatePayments;
