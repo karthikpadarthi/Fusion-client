@@ -17,13 +17,12 @@ function MessActivities() {
     { title: "View Bill" },
   ];
 
-  // Function to handle tab changes
   const handleTabChange = (direction) => {
     const newIndex =
       direction === "next"
-        ? Math.min(activeTab + 1, tabItems.length - 1)
-        : Math.max(activeTab - 1, 0);
-    setActiveTab(newIndex);
+        ? Math.min(+activeTab + 1, tabItems.length - 1)
+        : Math.max(+activeTab - 1, 0);
+    setActiveTab(String(newIndex));
     tabsListRef.current.scrollBy({
       left: direction === "next" ? 50 : -50,
       behavior: "smooth",
@@ -33,11 +32,11 @@ function MessActivities() {
   // Function to render content based on active tab
   const renderTabContent = () => {
     switch (activeTab) {
-      case 0:
+      case "0":
         return <BillBase />;
-      case 1:
+      case "1":
         return <UpdateBill />;
-      case 2:
+      case "2":
         return <ViewStudentBill />;
       default:
         return <Loader />;
@@ -48,6 +47,7 @@ function MessActivities() {
     <>
       {/* Tab navigation */}
       <Flex justify="center" align="center" mt="5">
+        {" "}
         <Flex justify="space-between" align="center" gap="1rem" mt="1.5rem">
           <Button
             onClick={() => handleTabChange("prev")}
@@ -59,22 +59,20 @@ function MessActivities() {
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
               weight="light"
-            />{" "}
-            {/* Updated icon */}
+            />
           </Button>
 
           <div className={classes.fusionTabsContainer} ref={tabsListRef}>
-            <Tabs
-              value={String(activeTab)}
-              onChange={(value) => setActiveTab(Number(value))}
-            >
+            <Tabs value={activeTab} onChange={setActiveTab}>
               <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
                     key={index}
                     className={
-                      activeTab === index ? classes.fusionActiveRecentTab : ""
+                      activeTab === `${index}`
+                        ? classes.fusionActiveRecentTab
+                        : ""
                     }
                   >
                     <Flex gap="4px">
@@ -96,8 +94,7 @@ function MessActivities() {
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
               weight="light"
-            />{" "}
-            {/* Updated icon */}
+            />
           </Button>
         </Flex>
       </Flex>
