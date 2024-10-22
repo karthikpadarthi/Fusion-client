@@ -70,7 +70,9 @@ function MessActivities() {
                     value={`${index}`}
                     key={index}
                     className={
-                      activeTab === index ? classes.fusionActiveRecentTab : ""
+                      activeTab === `${index}`
+                        ? classes.fusionActiveRecentTab
+                        : ""
                     }
                   >
                     <Flex gap="4px">
