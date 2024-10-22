@@ -1,13 +1,5 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Grid,
-  Loader,
-  Tabs,
-  Text,
-} from "@mantine/core";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react"; // Updated to latest icons
+import { Button, Container, Flex, Loader, Tabs, Text } from "@mantine/core";
+import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
@@ -61,10 +53,13 @@ function MessActivities() {
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
-            aria-label="Previous Tab" // Added aria-label for accessibility
+            bd={0}
+            bg="transparent"
           >
-            <CaretLeft className={classes.fusionCaretIcon} weight="light" />{" "}
+            <CaretCircleLeft
+              className={classes.fusionCaretIcon}
+              weight="light"
+            />{" "}
             {/* Updated icon */}
           </Button>
 
@@ -95,21 +90,22 @@ function MessActivities() {
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
-            aria-label="Next Tab" // Added aria-label for accessibility
+            bd={0}
+            bg="transparent"
           >
-            <CaretRight className={classes.fusionCaretIcon} weight="light" />{" "}
+            <CaretCircleRight
+              className={classes.fusionCaretIcon}
+              weight="light"
+            />{" "}
             {/* Updated icon */}
           </Button>
         </Flex>
       </Flex>
 
       {/* Main content */}
-      <Grid>
-        <Container fluid style={{ maxWidth: "600px", margin: "0 auto" }}>
-          {renderTabContent()}
-        </Container>
-      </Grid>
+      <Container fluid style={{ maxWidth: "600px", margin: "0 auto" }}>
+        {renderTabContent()}
+      </Container>
     </>
   );
 }

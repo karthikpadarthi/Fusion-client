@@ -1,8 +1,8 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
-  Grid,
   Loader,
   Tabs,
   Text,
@@ -60,7 +60,8 @@ function RegDeregUpdatePayment() {
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
@@ -69,17 +70,9 @@ function RegDeregUpdatePayment() {
           </Button>
 
           {/* Tabs container with scrolling */}
-          <div
-            style={{
-              display: "flex",
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-              maxWidth: "1000px",
-            }}
-            ref={tabsListRef}
-          >
+          <Box className={classes.fusionTabsContainer} ref={tabsListRef}>
             <Tabs value={activeTab} onChange={setActiveTab}>
-              <Tabs.List>
+              <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
@@ -97,13 +90,14 @@ function RegDeregUpdatePayment() {
                 ))}
               </Tabs.List>
             </Tabs>
-          </div>
+          </Box>
 
           <Button
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
@@ -114,11 +108,7 @@ function RegDeregUpdatePayment() {
       </Flex>
 
       {/* Main content */}
-      <Grid>
-        <Container fluid style={{ maxWidth: "1000px", margin: "0 auto" }}>
-          {renderTabContent()}
-        </Container>
-      </Grid>
+      <Container fluid>{renderTabContent()}</Container>
     </>
   );
 }

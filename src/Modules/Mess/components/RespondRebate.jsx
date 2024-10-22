@@ -5,8 +5,8 @@ import {
   Paper,
   Title,
   Button,
-  Group,
   TextInput,
+  Flex,
 } from "@mantine/core";
 import * as PhosphorIcons from "@phosphor-icons/react";
 
@@ -75,20 +75,74 @@ function RespondToRebateRequest() {
     return true;
   });
 
+  const renderHeader = () => (
+    <Table.Tr>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          Date
+        </Flex>
+      </Table.Th>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          Student ID
+        </Flex>
+      </Table.Th>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          Purpose
+        </Flex>
+      </Table.Th>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          From
+        </Flex>
+      </Table.Th>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          To
+        </Flex>
+      </Table.Th>
+      {filterStatus === "all" && (
+        <Table.Th>
+          <Flex align="center" justify="center" h="100%">
+            Approve
+          </Flex>
+        </Table.Th>
+      )}
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          Remark
+        </Flex>
+      </Table.Th>
+      <Table.Th>
+        <Flex align="center" justify="center" h="100%">
+          Actions
+        </Flex>
+      </Table.Th>
+    </Table.Tr>
+  );
+
   // Render rebate request rows
   const renderRows = () =>
     filteredRebateData.map((item, index) => (
-      <tr key={index} style={{ height: "50px" }}>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.date}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+      <Table.Tr key={index} h={50}>
+        <Table.Td align="center" p={12}>
+          {item.date}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.student_id}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.purpose}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.from}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.to}</td>
-
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.purpose}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.from}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.to}
+        </Table.Td>
         {filterStatus === "all" && (
-          <td style={{ textAlign: "center", padding: "12px" }}>
+          <Table.Td align="center" p={12}>
             <Button
               onClick={() => toggleApproval(index)}
               variant={item.approve ? "filled" : "outline"}
@@ -97,18 +151,16 @@ function RespondToRebateRequest() {
             >
               {item.approve ? "Approved" : "Not Approved"}
             </Button>
-          </td>
+          </Table.Td>
         )}
-
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        <Table.Td align="center" p={12}>
           <TextInput
             value={item.remark}
             onChange={(event) => updateRemark(index, event.currentTarget.value)}
             size="xs"
-            style={{ minWidth: "200px" }}
           />
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <Button
             onClick={() => removeRebateRequest(index)}
             variant="outline"
@@ -117,83 +169,49 @@ function RespondToRebateRequest() {
           >
             Remove
           </Button>
-        </td>
-      </tr>
+        </Table.Td>
+      </Table.Tr>
     ));
 
   return (
-    <Container
-      size="lg"
-      style={{
-        maxWidth: "1200px",
-        width: "900px",
-        marginTop: "25px",
-        marginLeft: "-10px",
-      }}
-    >
+    <Container size="lg" mt={30} miw="70rem">
       <Paper shadow="md" radius="md" p="lg" withBorder>
-        <Title order={2} align="center" mb="lg" style={{ color: "#1c7ed6" }}>
+        <Title order={2} align="center" mb="lg" c="#1c7ed6">
           Respond to Rebate Request
         </Title>
 
         {/* Filter buttons */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "30px",
-          }}
-        >
-          <Group>
-            <Button
-              leftIcon={<PhosphorIcons.Eye size={20} />}
-              variant={filterStatus === "all" ? "filled" : "outline"}
-              size="xs"
-              onClick={() => setFilterStatus("all")} // Show all requests
-            >
-              View All Requests
-            </Button>
-            <Button
-              leftIcon={<PhosphorIcons.Check size={20} />}
-              variant={filterStatus === "approved" ? "filled" : "outline"}
-              size="xs"
-              onClick={() => setFilterStatus("approved")} // Show only approved requests
-            >
-              Approved
-            </Button>
-            <Button
-              leftIcon={<PhosphorIcons.XCircle size={20} />}
-              variant={filterStatus === "unapproved" ? "filled" : "outline"}
-              size="xs"
-              onClick={() => setFilterStatus("unapproved")} // Show only unapproved requests
-            >
-              Unapproved
-            </Button>
-          </Group>
-        </div>
+        <Flex justify="center" align="center" mb={30} gap={20}>
+          <Button
+            leftSection={<PhosphorIcons.Eye size={20} />}
+            variant={filterStatus === "all" ? "filled" : "outline"}
+            size="xs"
+            onClick={() => setFilterStatus("all")} // Show all requests
+          >
+            All Requests
+          </Button>
+          <Button
+            leftSection={<PhosphorIcons.Check size={20} />}
+            variant={filterStatus === "approved" ? "filled" : "outline"}
+            size="xs"
+            onClick={() => setFilterStatus("approved")} // Show only approved requests
+          >
+            Approved
+          </Button>
+          <Button
+            leftSection={<PhosphorIcons.XCircle size={20} />}
+            variant={filterStatus === "unapproved" ? "filled" : "outline"}
+            size="xs"
+            onClick={() => setFilterStatus("unapproved")} // Show only unapproved requests
+          >
+            Unapproved
+          </Button>
+        </Flex>
 
         {/* Table */}
-        <Table striped highlightOnHover withBorder withColumnBorders>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center", padding: "12px" }}>Date</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Student ID
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Purpose</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>From</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>To</th>
-              {filterStatus === "all" && (
-                <th style={{ textAlign: "center", padding: "12px" }}>
-                  Approve
-                </th>
-              )}
-              <th style={{ textAlign: "center", padding: "12px" }}>Remark</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>{renderRows()}</tbody>
+        <Table striped highlightOnHover withColumnBorders>
+          <Table.Thead>{renderHeader()}</Table.Thead>
+          <Table.Tbody>{renderRows()}</Table.Tbody>
         </Table>
       </Paper>
     </Container>

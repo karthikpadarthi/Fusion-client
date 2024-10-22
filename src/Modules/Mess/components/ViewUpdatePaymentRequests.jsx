@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Container, Paper, Title, Button } from "@mantine/core";
+import { Table, Container, Paper, Title, Button, Flex } from "@mantine/core";
 
 const initialUpdatePaymentRequests = [
   {
@@ -42,24 +42,28 @@ function ViewUpdatePaymentRequests() {
   // Render update payment request rows
   const renderRows = () =>
     updatePaymentData.map((item, index) => (
-      <tr key={index}>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+      <Table.Tr key={index}>
+        <Table.Td align="center" p={12}>
           {item.student_id}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.transaction_no}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <a href={item.image_url} target="_blank" rel="noopener noreferrer">
             View Image
           </a>
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.amount}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.amount}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           {item.payment_date}
-        </td>
-        <td style={{ textAlign: "center", padding: "12px" }}>{item.remark}</td>
-        <td style={{ textAlign: "center", padding: "12px" }}>
+        </Table.Td>
+        <Table.Td align="center" p={12}>
+          {item.remark}
+        </Table.Td>
+        <Table.Td align="center" p={12}>
           <Button
             onClick={() => toggleAcceptance(index)}
             variant={item.accepted ? "filled" : "outline"}
@@ -68,42 +72,60 @@ function ViewUpdatePaymentRequests() {
           >
             {item.accepted ? "Accepted" : "Rejected"}
           </Button>
-        </td>
-      </tr>
+        </Table.Td>
+      </Table.Tr>
     ));
 
   return (
-    <Container size="lg" style={{ marginTop: "25px" }}>
+    <Container size="lg" mt={30} miw="60rem">
       <Paper shadow="md" radius="md" p="lg" withBorder>
         <Title order={2} align="center" mb="lg" style={{ color: "#1c7ed6" }}>
           Update Payment Requests
         </Title>
 
         {/* Table */}
-        <Table striped highlightOnHover withBorder withColumnBorders>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Student ID
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Transaction No
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Image</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Amount</th>
-              <th
-                style={{ textAlign: "center", padding: "12px", width: "100px" }}
-              >
-                Payment Date
-              </th>
-              <th style={{ textAlign: "center", padding: "12px" }}>Remark</th>
-              <th style={{ textAlign: "center", padding: "12px" }}>
-                Accept/Reject
-              </th>
-            </tr>
-          </thead>
+        <Table striped highlightOnHover withColumnBorders>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Student ID
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Transaction No
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Image
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Amount
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Payment Date
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Remark
+                </Flex>
+              </Table.Th>
+              <Table.Th>
+                <Flex align="center" justify="center" h="100%">
+                  Accept/Reject
+                </Flex>
+              </Table.Th>
+            </Table.Tr>
+          </Table.Thead>
 
-          <tbody>{renderRows()}</tbody>
+          <Table.Tbody>{renderRows()}</Table.Tbody>
         </Table>
       </Paper>
     </Container>

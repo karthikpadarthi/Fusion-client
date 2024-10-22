@@ -1,16 +1,27 @@
-import { Button, Container, Flex, Loader, Tabs, Text } from "@mantine/core";
+import {
+  Button,
+  Container,
+  Flex,
+  Grid,
+  Loader,
+  Tabs,
+  Text,
+} from "@mantine/core";
 import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import classes from "../styles/messModule.module.css";
 
-import UpdateBill from "./UpdateBills.jsx";
-import ViewFeedback from "./ViewFeedback.jsx";
+import UpdateBalanceRequest from "./UpdateBalanceRequest.jsx";
+import UpdateBalanceRequestStatus from "./UpdateBalanceRequestStatus.jsx";
 
-function Feedback() {
+function UpdatePayments() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
-  const tabItems = [{ title: "View Feedback" }, { title: "Statistics" }];
+  const tabItems = [
+    { title: "Update Balance Request" },
+    { title: "Request Status" },
+  ];
 
   const handleTabChange = (direction) => {
     const newIndex =
@@ -19,7 +30,7 @@ function Feedback() {
         : Math.max(+activeTab - 1, 0);
     setActiveTab(String(newIndex));
     tabsListRef.current.scrollBy({
-      left: direction === "next" ? 50 : -50,
+      left: direction === "next" ? 100 : -100,
       behavior: "smooth",
     });
   };
@@ -28,9 +39,9 @@ function Feedback() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "0":
-        return <ViewFeedback />;
+        return <UpdateBalanceRequest />;
       case "1":
-        return <UpdateBill />;
+        return <UpdateBalanceRequestStatus />;
       default:
         return <Loader />;
     }
@@ -40,14 +51,12 @@ function Feedback() {
     <>
       {/* Tab navigation */}
       <Flex justify="center" align="center" mt="5">
-        {" "}
         <Flex justify="space-between" align="center" gap="1rem" mt="1.5rem">
           <Button
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            bd={0}
-            bg="transparent"
+            style={{ border: "none" }}
           >
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
@@ -55,9 +64,18 @@ function Feedback() {
             />
           </Button>
 
-          <div className={classes.fusionTabsContainer} ref={tabsListRef}>
+          {/* Tabs container with scrolling */}
+          <div
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+              maxWidth: "1000px",
+            }}
+            ref={tabsListRef}
+          >
             <Tabs value={activeTab} onChange={setActiveTab}>
-              <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
+              <Tabs.List>
                 {tabItems.map((item, index) => (
                   <Tabs.Tab
                     value={`${index}`}
@@ -81,8 +99,7 @@ function Feedback() {
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            bd={0}
-            bg="transparent"
+            style={{ border: "none" }}
           >
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
@@ -92,11 +109,14 @@ function Feedback() {
         </Flex>
       </Flex>
 
-      <Container fluid style={{ maxWidth: "600px", margin: "0 auto" }}>
-        {renderTabContent()}
-      </Container>
+      {/* Main content */}
+      <Grid>
+        <Container fluid style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          {renderTabContent()}
+        </Container>
+      </Grid>
     </>
   );
 }
 
-export default Feedback;
+export default UpdatePayments;

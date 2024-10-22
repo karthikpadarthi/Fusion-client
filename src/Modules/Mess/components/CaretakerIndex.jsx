@@ -1,8 +1,8 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
-  Grid,
   Loader,
   Tabs,
   Text,
@@ -17,22 +17,23 @@ import ViewFeedback from "./ViewFeedback.jsx";
 import RespondToRebateRequest from "./RespondRebate.jsx";
 import ViewSpecialFoodRequest from "./ViewSpecialFoodRequest.jsx";
 import RegDeregUpdatePayment from "./RegisterDeregisterUpdateRequest.jsx";
-import MessRegistration from "./MessRegistrations.jsx";
+import UpdateMenu from "./UpdateMenu.jsx";
+import MessRegistrations from "./MessRegistrations.jsx";
 
 function Caretaker() {
   const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
   const tabItems = [
-    { title: "View FeedBack | Statistics" },
-    { title: "Respond to rebate requests" },
-    { title: "Reg/Dereg/UpdatePayment Requests" },
-    { title: "View Special Food requests" },
+    { title: "View Feedback" },
+    { title: "Respond to Rebate" },
+    { title: "Requests" },
+    { title: "View Special Food Requests" },
     { title: "View Menu" },
     { title: "Mess Activities" },
     { title: "Mess Registrations" },
     { title: "Update Menu" },
-    { title: "Update Sem Dates" },
+    { title: "Update Semester Dates" },
   ];
 
   const handleTabChange = (direction) => {
@@ -63,9 +64,9 @@ function Caretaker() {
       case "5":
         return <MessActivities />;
       case "6":
-        return <MessRegistration />;
+        return <MessRegistrations />;
       case "7":
-        return <p>Update Menu</p>;
+        return <UpdateMenu />;
       case "8":
         return <UpdateSemDates />;
       default:
@@ -83,7 +84,8 @@ function Caretaker() {
             onClick={() => handleTabChange("prev")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleLeft
               className={classes.fusionCaretCircleIcon}
@@ -91,7 +93,7 @@ function Caretaker() {
             />
           </Button>
 
-          <div className={classes.fusionTabsContainer} ref={tabsListRef}>
+          <Box className={classes.fusionTabsContainer} ref={tabsListRef}>
             <Tabs value={activeTab} onChange={setActiveTab}>
               <Tabs.List style={{ display: "flex", flexWrap: "nowrap" }}>
                 {tabItems.map((item, index) => (
@@ -111,13 +113,14 @@ function Caretaker() {
                 ))}
               </Tabs.List>
             </Tabs>
-          </div>
+          </Box>
 
           <Button
             onClick={() => handleTabChange("next")}
             variant="default"
             p={0}
-            style={{ border: "none" }}
+            bd={0}
+            bg="transparent"
           >
             <CaretCircleRight
               className={classes.fusionCaretCircleIcon}
@@ -127,10 +130,7 @@ function Caretaker() {
         </Flex>
       </Flex>
 
-      {/* Main content */}
-      <Grid>
-        <Container fluid>{renderTabContent()}</Container>
-      </Grid>
+      <Container fluid>{renderTabContent()}</Container>
     </>
   );
 }
