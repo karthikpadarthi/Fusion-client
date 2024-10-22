@@ -22,7 +22,7 @@ function MessActivities() {
       direction === "next"
         ? Math.min(+activeTab + 1, tabItems.length - 1)
         : Math.max(+activeTab - 1, 0);
-    setActiveTab(String(newIndex));
+    setActiveTab(newIndex);
     tabsListRef.current.scrollBy({
       left: direction === "next" ? 50 : -50,
       behavior: "smooth",
@@ -70,9 +70,7 @@ function MessActivities() {
                     value={`${index}`}
                     key={index}
                     className={
-                      activeTab === `${index}`
-                        ? classes.fusionActiveRecentTab
-                        : ""
+                      activeTab === index ? classes.fusionActiveRecentTab : ""
                     }
                   >
                     <Flex gap="4px">
