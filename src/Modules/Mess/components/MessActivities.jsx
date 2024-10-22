@@ -8,7 +8,7 @@ import BillBase from "./BillBaseAndExcelUpload.jsx";
 import ViewStudentBill from "./ViewStudentBill.jsx";
 
 function MessActivities() {
-  const [activeTab, setActiveTab] = useState(0); // Use integer instead of string for the active tab
+  const [activeTab, setActiveTab] = useState("0");
   const tabsListRef = useRef(null);
 
   const tabItems = [
@@ -57,7 +57,7 @@ function MessActivities() {
             bg="transparent"
           >
             <CaretCircleLeft
-              className={classes.fusionCaretIcon}
+              className={classes.fusionCaretCircleIcon}
               weight="light"
             />{" "}
             {/* Updated icon */}
@@ -94,7 +94,7 @@ function MessActivities() {
             bg="transparent"
           >
             <CaretCircleRight
-              className={classes.fusionCaretIcon}
+              className={classes.fusionCaretCircleIcon}
               weight="light"
             />{" "}
             {/* Updated icon */}
