@@ -3,6 +3,8 @@ import { CaretCircleLeft, CaretCircleRight } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import CustomBreadcrumbs from "../../../components/Breadcrumbs.jsx";
 import classes from "../styles/messModule.module.css";
+import ViewRegistrations from "./ViewRegistration.jsx";
+import ViewBills from "./ViewStudentBill.jsx";
 
 function Warden() {
   const [activeTab, setActiveTab] = useState("0");
@@ -35,9 +37,9 @@ function Warden() {
       case "1":
         return <p>View Menu</p>;
       case "2":
-        return <p>View Bills</p>;
+        return <ViewBills />;
       case "3":
-        return <p>View Registrations</p>;
+        return <ViewRegistrations />;
       default:
         return <Loader />;
     }
